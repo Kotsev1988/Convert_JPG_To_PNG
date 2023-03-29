@@ -1,25 +1,21 @@
 package com.example.convert_jpg_to_png.model
 
-import android.app.Activity
-import android.content.ContentResolver
+
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import com.example.convert_jpg_to_png.App
-
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 
 class ConvertJPGToPNG {
 
-     fun convertImage(name: String, fileNamePNG: String): Boolean {
+    fun convertImage(name: String, fileNamePNG: String): Boolean {
 
-         var result: Boolean = false
+        var result: Boolean = false
         val picBitmap: Bitmap
         val outStream: FileOutputStream
         try {
@@ -31,7 +27,7 @@ class ConvertJPGToPNG {
         } catch (exception: FileNotFoundException) {
             exception.printStackTrace()
         }
-         return result
+        return result
     }
 
     fun getPathsPNG(imageUri: String): String {
@@ -42,17 +38,18 @@ class ConvertJPGToPNG {
         return pathForPNG + "/" + fileImageJPG.nameWithoutExtension + ".png"
     }
 
-     fun getRealPath(contentURI: Uri): String {
+    fun getRealPath(contentURI: String): String {
 
         val cursor: Cursor? =
-            App.instance.contentResolver.query(contentURI, null, null, null, null)
+            App.instance.contentResolver.query(Uri.parse(contentURI), null, null, null, null)
         val resultPath = if (cursor == null) {
-            contentURI.path.toString()
+            contentURI
         } else {
             cursor.moveToFirst()
             val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
             cursor.getString(idx)
         }
+        cursor?.close()
         return resultPath
     }
 }

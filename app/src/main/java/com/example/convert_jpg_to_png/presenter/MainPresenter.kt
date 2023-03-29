@@ -1,7 +1,5 @@
 package com.example.convert_jpg_to_png.presenter
 
-import android.media.ExifInterface
-import android.net.Uri
 import com.example.convert_jpg_to_png.model.ConvertJPGToPNG
 import com.example.convert_jpg_to_png.ui.UserView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -12,18 +10,18 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainPresenter(var userView: UserView) {
 
-    private val model = ConvertJPGToPNG()
+     private val model = ConvertJPGToPNG()
      var  dispasable = CompositeDisposable()
 
     fun registerActivityResults() {
         userView.registerActivityResults()
     }
 
-    fun setImage(uri: Uri) {
+    fun setImage(uri: String) {
         userView.setImage(uri)
     }
 
-    fun convert(uri: Uri) {
+    fun convert(uri: String) {
         userView.showDialog()
         var realPathJPG: String = ""
         var pathOfPNG: String = ""

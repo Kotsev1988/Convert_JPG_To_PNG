@@ -2,26 +2,21 @@ package com.example.convert_jpg_to_png.ui
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.convert_jpg_to_png.App
 import com.example.convert_jpg_to_png.R
 import com.example.convert_jpg_to_png.databinding.ActivityMainBinding
 import com.example.convert_jpg_to_png.presenter.MainPresenter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 
@@ -43,7 +38,7 @@ class MainActivity : AppCompatActivity(), UserView {
     private lateinit var imageUri: Uri
     private lateinit var dialog: AlertDialog
 
-    val presenter = MainPresenter(this)
+    private val presenter = MainPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +50,7 @@ class MainActivity : AppCompatActivity(), UserView {
         presenter.setConvertButtonVisible(false)
 
         binding.convertButton.setOnClickListener {
-            presenter.convert(imageUri)
+            presenter.convert(imageUri.toString())
         }
 
         binding.getPic.setOnClickListener {
@@ -139,7 +134,7 @@ class MainActivity : AppCompatActivity(), UserView {
                 }.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnComplete {
-                        presenter.setImage(imageUri)
+                        presenter.setImage(imageUri.toString())
                         presenter.setConvertButtonVisible(true)
                     }
                     .subscribe()
@@ -162,8 +157,8 @@ class MainActivity : AppCompatActivity(), UserView {
             }
     }
 
-    override fun setImage(path: Uri) {
-        binding.selectedImage.setImageURI(path)
+    override fun setImage(path: String) {
+        binding.selectedImage.setImageURI(Uri.parse(path))
     }
 
     override fun setPngImage(pathOfPNG: String) {
@@ -173,7 +168,7 @@ class MainActivity : AppCompatActivity(), UserView {
     override fun showDialog() {
 
         val builder = AlertDialog.Builder(this)
-        val customLayout = layoutInflater.inflate(R.layout.custom_dialog, null);
+        val customLayout = layoutInflater.inflate(R.layout.custom_dialog, null)
         builder.setView(customLayout)
 
         dialog = builder
