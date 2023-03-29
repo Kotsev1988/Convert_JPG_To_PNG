@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Convert_JPG_To_PNG</string>
+    <string name="select_file">Выберите файл</string>
+    <string name="load_image">Load Image</string>
+    <string name="dialog_button_close">Закрыть</string>
+    <string name="dialog_button_cancel">Отмена</string>
+    <string name="dialog_run_converting_text">Выполняется конвертация</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="dialog_title_no_access_to_file_system">Доступ к фаловой системе закрыт</string>
+    <string name="dialog_message_no_file_system_access">Разрешите доступ к файловой системе</string>
+    <string name="dialog_rationale_give_access">Предоставить доступ</string>
+    <string name="dialog_rationale_decline">Не надо</string>
+    <string name="convert">Convert</string>
+</resources>
