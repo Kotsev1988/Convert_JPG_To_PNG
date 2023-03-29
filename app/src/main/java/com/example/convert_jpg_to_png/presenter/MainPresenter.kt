@@ -1,6 +1,7 @@
 package com.example.convert_jpg_to_png.presenter
 
 import com.example.convert_jpg_to_png.model.ConvertJPGToPNG
+import com.example.convert_jpg_to_png.model.ConvertJPGToPNGImpl
 import com.example.convert_jpg_to_png.ui.UserView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -10,7 +11,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainPresenter(var userView: UserView) {
 
-     private val model = ConvertJPGToPNG()
+     private val model: ConvertJPGToPNG = ConvertJPGToPNGImpl()
      var  dispasable = CompositeDisposable()
 
     fun registerActivityResults() {
@@ -22,8 +23,9 @@ class MainPresenter(var userView: UserView) {
     }
 
     fun convert(uri: String) {
+
         userView.showDialog()
-        var realPathJPG: String = ""
+        var realPathJPG: String
         var pathOfPNG: String = ""
 
         val disposable1 = Observable.fromCallable {

@@ -11,9 +11,9 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 
-class ConvertJPGToPNG {
+class ConvertJPGToPNGImpl: ConvertJPGToPNG {
 
-    fun convertImage(name: String, fileNamePNG: String): Boolean {
+    override fun convertImage(name: String, fileNamePNG: String): Boolean {
 
         var result: Boolean = false
         val picBitmap: Bitmap
@@ -30,7 +30,7 @@ class ConvertJPGToPNG {
         return result
     }
 
-    fun getPathsPNG(imageUri: String): String {
+    override fun getPathsPNG(imageUri: String): String {
 
         val fileImageJPG = File(imageUri)
         val pathForPNG = fileImageJPG.path.substring(0, fileImageJPG.path.lastIndexOf("/"))
@@ -38,7 +38,7 @@ class ConvertJPGToPNG {
         return pathForPNG + "/" + fileImageJPG.nameWithoutExtension + ".png"
     }
 
-    fun getRealPath(contentURI: String): String {
+    override fun getRealPath(contentURI: String): String {
 
         val cursor: Cursor? =
             App.instance.contentResolver.query(Uri.parse(contentURI), null, null, null, null)
