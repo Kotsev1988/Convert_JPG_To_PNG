@@ -4,6 +4,7 @@ import com.example.convert_jpg_to_png.model.ConvertJPGToPNG
 import com.example.convert_jpg_to_png.model.ConvertJPGToPNGImpl
 import com.example.convert_jpg_to_png.ui.UserView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,7 +29,8 @@ class MainPresenter(var userView: UserView) {
         var realPathJPG: String
         var pathOfPNG: String = ""
 
-        val disposable1 = Observable.fromCallable {
+        val disposable = Observable.fromCallable {
+
                 realPathJPG = model.getRealPath(uri)
                 pathOfPNG = model.getPathsPNG(realPathJPG)
                return@fromCallable model.convertImage(realPathJPG, pathOfPNG)
@@ -48,7 +50,7 @@ class MainPresenter(var userView: UserView) {
                 }
             }
 
-        dispasable.addAll(disposable1)
+        dispasable.addAll(disposable)
 
     }
 
