@@ -4,7 +4,6 @@ import com.example.convert_jpg_to_png.model.ConvertJPGToPNG
 import com.example.convert_jpg_to_png.model.ConvertJPGToPNGImpl
 import com.example.convert_jpg_to_png.ui.UserView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
