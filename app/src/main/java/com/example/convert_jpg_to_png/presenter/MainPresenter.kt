@@ -51,7 +51,6 @@ class MainPresenter(var userView: UserView) {
             }
 
         dispasable.addAll(disposable)
-
     }
 
     fun cancelConvert(){
