@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.convert_jpg_to_png.R
 import com.example.convert_jpg_to_png.databinding.ActivityMainBinding
+import com.example.convert_jpg_to_png.model.ConvertJPGToPNGImpl
 import com.example.convert_jpg_to_png.presenter.MainPresenter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), UserView {
     private lateinit var imageUri: Uri
     private lateinit var dialog: AlertDialog
 
-    private val presenter = MainPresenter(this)
+    private val presenter = MainPresenter(this, ConvertJPGToPNGImpl(), Schedulers.io(), AndroidSchedulers.mainThread())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
